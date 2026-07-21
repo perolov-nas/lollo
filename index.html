@@ -1,12 +1,50 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="sv">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lollo</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#1a4a45">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <title>Lollo & Peppe — Schema</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Figtree:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <h1>Lollo</h1>
-    <p>Lollo is a website that allows you to create and share your own lollos.</p>
+  <div class="atmosphere" aria-hidden="true">
+    <div class="blob blob-a"></div>
+    <div class="blob blob-b"></div>
+    <div class="blob blob-c"></div>
+  </div>
+
+  <div class="app">
+    <header class="top">
+      <p class="brand">Lollo &amp; Peppe</p>
+      <div class="meta" id="meta">
+        <span class="pill" id="week-pill"></span>
+        <span class="pill soft" id="parity-pill"></span>
+      </div>
+    </header>
+
+    <section class="hero-line" aria-live="polite">
+      <h1 id="greeting">Hej</h1>
+      <p id="date-line" class="date-line"></p>
+    </section>
+
+    <main class="days" id="days"></main>
+
+    <section class="legend">
+      <h2>Veckomönster</h2>
+      <p>Onsdag växlar mellan jämna (JV) och ojämna (OV) veckor. Fredagar har egna tider per veckonummer.</p>
+    </section>
+
+    <footer class="foot">
+      <p>Uppdateras automatiskt utifrån dagens datum och ISO-vecka.</p>
+    </footer>
+  </div>
+
+  <script src="scripts.js"></script>
 </body>
 </html>
