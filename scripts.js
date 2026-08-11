@@ -84,9 +84,9 @@
       case 3: // Onsdag
         return even
           ? { hours: "09.00–13.00", note: "Jämn vecka (JV)" }
-          : { hours: "09.00–16.30", note: "Ojämn vecka (OV)" };
+          : { hours: "09.00–16.30", note: "Ojämn vecka (OJ)" };
       case 4: // Torsdag
-        return { hours: "07.15–12.00", note: null };
+        return { hours: "07.00–14.15", note: null };
       case 5: // Fredag
         return {
           hours: fridayHours(week),
@@ -131,7 +131,7 @@
           pickup: "Peppe",
           train: "Peppe & Lollo",
           detail:
-            "OV: Ni åker och lämnar tillsammans. Peppe hämtar med bilen när barnen slutat.",
+            "OJ: Ni åker och lämnar tillsammans. Peppe hämtar med bilen när barnen slutat.",
         };
       case 4:
         return {
@@ -236,19 +236,28 @@
 
   function render() {
     const now = new Date();
-    const tomorrow = addDays(now, 1);
     const week = getISOWeek(now);
     const even = isEvenWeek(week);
+    const mondayOffset = (now.getDay() + 6) % 7;
+    const monday = addDays(now, -mondayOffset);
+    const weekDays = Array.from({ length: 5 }, (_, index) => {
+      const date = addDays(monday, index);
+      const isToday = date.toDateString() === now.toDateString();
+      const label = isToday
+        ? "Idag"
+        : `${date.getDate()} ${MONTH_NAMES[date.getMonth()].slice(0, 3)}`;
+
+      return renderDayCard(date, label);
+    });
 
     document.getElementById("greeting").textContent = greetingFor(now.getHours());
     document.getElementById("date-line").textContent = formatLongDate(now);
     document.getElementById("week-pill").textContent = `Vecka ${week}`;
     document.getElementById("parity-pill").textContent = even
       ? "Jämn vecka (JV)"
-      : "Ojämn vecka (OV)";
+      : "Ojämn vecka (OJ)";
 
-    document.getElementById("days").innerHTML =
-      renderDayCard(now, "Idag") + renderDayCard(tomorrow, "Imorgon");
+    document.getElementById("days").innerHTML = weekDays.join("");
   }
 
   render();
